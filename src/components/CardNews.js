@@ -19,6 +19,7 @@ class CardNews extends HTMLElement {
 
         const linkTitle = document.createElement("a");
         linkTitle.textContent = this.getAttribute("title")
+        linkTitle.href = this.getAttribute("link-url");
 
         const newsContents = document.createElement("p");
         newsContents.textContent = this.getAttribute("content")
@@ -31,6 +32,8 @@ class CardNews extends HTMLElement {
         cardRight.setAttribute("class", "card_right");
 
         const newsImage = document.createElement("img");  
+        newsImage.src = this.getAttribute("photo") || "/assets/image.jpeg";
+        newsImage.alt = "Foto da noticia"; 
         cardRight.appendChild(newsImage);
 
         componentRoot.appendChild(cardLeft);
@@ -40,7 +43,43 @@ class CardNews extends HTMLElement {
     }
 
     styles(){
+        const style = document.createElement("style");
+        style.textContent = `
+        .card{
+            width: 80%;
+            box-shadow: 11px 9px 20px 1px rgba(0,0,0,0.75);
+            -webkit-box-shadow: 11px 9px 20px 1px rgba(0,0,0,0.75);
+            -moz-box-shadow: 11px 9px 20px 1px rgba(0,0,0,0.75);;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
 
+        .card_left{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 10px;
+        }
+
+        .card_left > span{
+            font-weight: 400;
+        }
+
+        .card_left > a{
+            margin-top: 15px;
+            font-size: 25px;
+            color: black;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .card_left > p{
+            color: rgb(70, 68, 68);
+        }
+        `;
+
+        return style
     }
 }
 
