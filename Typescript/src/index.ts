@@ -125,3 +125,61 @@ p1.attack();
 
 const p2 = new Magician("Mago",9,30,100);
 p2.attack();
+
+//generics
+function concatArray<T>(...itens:T[]):T[]{
+    return new Array().concat(...itens);
+}
+
+const numArray = concatArray<number[]>([1,5],[2]);
+const stringArray = concatArray<string[]>(["felipe","goku"],["jhonny"])
+console.log(numArray);
+console.log(stringArray);
+
+function ExibirNome(target: any){
+    console.log(target);
+}
+@ExibirNome
+class Funcionario {}
+
+function apiVersion(version:string){
+    return (target:any)=>{
+        Object.assign(target.prototype, {__version: version});
+    }
+}
+@apiVersion("1.10")
+class Api{}
+
+const api = new Api();
+console.log(api.__version);
+
+function minLength(length:number){
+    return (target: any, key:string) => {
+        let _value = target[key];
+
+        const getter = () => _value;
+        const setter = (value:string)=>{
+            if(value.length < length) {
+                throw new Error(`Tamanho menor do que ${length}`);
+            } else{
+                _value = value;
+            }
+        };
+
+        Object.defineProperty(target, key, {
+            get: getter,
+            set:setter,
+        });
+    };
+}
+
+class Api2{
+    @minLength(3)
+    name:string;
+    constructor(name:string){
+        this.name = name;
+    }
+}
+
+const api2 = new Api2("usa");
+console.log(api2.name);

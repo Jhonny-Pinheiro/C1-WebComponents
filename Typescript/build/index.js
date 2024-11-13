@@ -92,3 +92,10 @@ const p1 = new Character("Ryu", 10, 98);
 p1.attack();
 const p2 = new Magician("Mago", 9, 30, 100);
 p2.attack();
+function concatArray(...itens) {
+    return new Array().concat(...itens);
+}
+const numArray = concatArray([1, 5], [2]);
+const stringArray = concatArray(["felipe", "goku"], ["vegeta"]);
+console.log(numArray);
+console.log(stringArray);
