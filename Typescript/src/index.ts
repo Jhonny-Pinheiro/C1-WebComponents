@@ -150,9 +150,6 @@ function apiVersion(version:string){
 @apiVersion("1.10")
 class Api{}
 
-const api = new Api();
-console.log(api.__version);
-
 function minLength(length:number){
     return (target: any, key:string) => {
         let _value = target[key];
